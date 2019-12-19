@@ -3,7 +3,7 @@ package calculator;
 import javax.swing.*;
 
 public class ButtonForDigit extends JButton {
-	int number = 0;
+	private int number = 0;
 	ButtonForDigit(){
 		super(" ");
 	}
@@ -14,12 +14,14 @@ public class ButtonForDigit extends JButton {
 	}
 	
 	void DoTask() {
+		if(number == 0 && Calculator.screenNumber.equals("0")) return;
 		if(Calculator.currentState!='O') {
-			Calculator.math_expression+=number;
-			Calculator.screenNumber+=number;
+			if(Calculator.screenNumber.equals("0")) Calculator.screenNumber = String.valueOf(number);
+			else Calculator.screenNumber+=number;
 			For_Gui.textscreen.setText(Calculator.screenNumber);
 		}
 		else {
+			
 			Calculator.screenNumber = String.valueOf(number);
 		}
 		Calculator.currentState = (char)number;
